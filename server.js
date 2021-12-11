@@ -1,32 +1,36 @@
 const express = require('express')
 const cors = require('cors')
 
+const initializeRoute = require('./src/routes')
+const dotenv = require('dotenv')
+const apiRoutes = express.Router()
+
+const {
+  authMiddlewere: { validateApiAcess },
+} = require('./src/middlewares')
+
+const {
+  functions: { getAppPort, getCorsOptions },
+} = require('./src/utilities')
+
+// == start ==
+
+dotenv.config()
+
 const app = express()
-
-var corsOptions = {
-  origin: 'https://localhost:8081',
-}
-
-// middlewares
-
-app.use(cors(corsOptions))
 
 app.use(express.json())
 
+app.use(validateApiAcess)
+
+initializeRoute(apiRoutes)
+
+app.use('/api', apiRoutes)
+
+app.use(cors(getCorsOptions()))
+
 app.use(express.urlencoded({ extended: true }))
 
-// test
-
-app.get('/', (req, res) => {
-  res.json({ message: 'teste' })
-})
-
-// port
-
-const PORT = process.env.PORT || 8080
-
-// server
-
-app.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`)
+app.listen(getAppPort(), () => {
+  console.log(`server is running on port ${getAppPort()}...`)
 })
