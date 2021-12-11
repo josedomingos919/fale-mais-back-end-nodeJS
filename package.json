@@ -1,0 +1,30 @@
+{
+  "name": "fale-mais-back-end-nodejs",
+  "version": "1.0.0",
+  "description": "Fale mais NodeJs API com Sequelize",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josedomingos919/fale-mais-back-end-nodeJS.git"
+  },
+  "keywords": [
+    "nodeJS",
+    "mysql",
+    "sequelize"
+  ],
+  "author": "José Ndonge",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josedomingos919/fale-mais-back-end-nodeJS/issues"
+  },
+  "homepage": "https://github.com/josedomingos919/fale-mais-back-end-nodeJS#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.0-beta.2"
+  }
+}
