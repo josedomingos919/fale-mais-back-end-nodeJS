@@ -1,52 +1,59 @@
 const db = require('../models')
 
-const Product = db.products
+const PriceList = db.priceList
 
 const add = async (req, res) => {
   const { name, maxMinute, percentageAdd, price } = req.body
 
-  const productResponse = await Product.create({
+  const response = await PriceList.create({
     name,
     price,
     maxMinute,
     percentageAdd,
   })
 
-  res.status(200).send(productResponse)
+  res.status(200).send(response)
 }
 
 const getAll = async (req, res) => {
-  const productsResponse = await Product.findAll()
-
-  res.status(200).send(productsResponse)
+  const response = await PriceList.findAll()
+  res.status(200).send(response)
 }
 
 const getOne = async (req, res) => {
   const { id } = req.params
 
-  const productResponse = await Product.findOne({
+  const response = await PriceList.findOne({
     where: {
       id,
     },
   })
 
-  res.status(200).send(productResponse)
+  res.status(200).send(response)
 }
 
 const update = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.query
 
-  const productResponse = await Product.update(req.body, {
+  if (!id) {
+    res.status(401).send({
+      error: true,
+      message: 'Eperava receber o id',
+    })
+    return
+  }
+
+  const response = await PriceList.update(req.body, {
     where: { id },
   })
 
-  res.status(200).send(productResponse)
+  res.status(200).send(response)
 }
 
 const destroy = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.query
 
-  await Product.destroy({
+  await PriceList.destroy({
     where: {
       id,
     },

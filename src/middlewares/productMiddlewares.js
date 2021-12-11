@@ -42,4 +42,16 @@ const productValidation = async (req, res, next) => {
   else res.status(400).send(errors)
 }
 
-module.exports = { productValidation }
+const idValidation = async (req, res, next) => {
+  const { id } = req.params
+
+  if (isEmpty(id)) {
+    res.status(401).send({
+      error: true,
+      field: 'id',
+      message: 'Required field id',
+    })
+  } else next()
+}
+
+module.exports = { productValidation, idValidation }

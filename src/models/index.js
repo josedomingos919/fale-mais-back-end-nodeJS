@@ -1,11 +1,18 @@
-const dbConfig = require('../config/dbConfig')
+const {
+  DB,
+  USER,
+  PASSWORD,
+  HOST: host,
+  dialect,
+  pool,
+} = require('../config/dbConfig')
 
 const { Sequelize, DataTypes } = require('sequelize')
 
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-  host: dbConfig.HOST,
-  dialect: dbConfig.dialect,
-  pool: dbConfig.pool,
+const sequelize = new Sequelize(DB, USER, PASSWORD, {
+  host,
+  dialect,
+  pool,
   operatorsAliases: false,
 })
 
@@ -24,7 +31,7 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 
 db.products = require('./productModel.js')(sequelize, DataTypes)
-db.priceList = require('./priceList.js')(sequelize, DataTypes)
+db.priceList = require('./priceList')(sequelize, DataTypes)
 
 db.sequelize.sync({ force: false }).then(() => {
   console.log('yes re-sync done!')

@@ -1,24 +1,16 @@
 const productController = require('../controllers/productController')
-const { productMiddlewares } = require('./../middlewares')
+const {
+  productMiddlewares: { idValidation, productValidation },
+} = require('./../middlewares')
 
 module.exports = (apiRoutes) => {
-  apiRoutes.post(
-    '/product',
-    productMiddlewares.productValidation,
-    productController.addProduct,
-  )
+  apiRoutes.post('/product', productValidation, productController.add)
 
-  apiRoutes.get('/product', productController.getProduct)
+  apiRoutes.get('/product', productController.getAll)
 
-  apiRoutes.get('/product/all', productController.getAllProducts)
+  apiRoutes.get('/product/:id', idValidation, productController.getOne)
 
-  apiRoutes.put('/product/edit', productController.updateProduct)
+  apiRoutes.put('/product/edit/:id', idValidation, productController.update)
 
-  apiRoutes.delete('/product/:id', productController.deleteProduct)
-
-  apiRoutes.get('/product/published', productController.getPublishedProducts)
-
-  apiRoutes.get('/product/test', (req, res) => {
-    res.send('teste')
-  })
+  apiRoutes.delete('/product/:id', idValidation, productController.destroy)
 }
