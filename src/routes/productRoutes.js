@@ -1,6 +1,8 @@
 const productController = require('../controllers/productController')
+
 const {
-  productMiddlewares: { idValidation, productValidation },
+  validationMiddleware: { idValidation },
+  productMiddlewares: { productValidation },
 } = require('./../middlewares')
 
 module.exports = (apiRoutes) => {
@@ -10,7 +12,7 @@ module.exports = (apiRoutes) => {
 
   apiRoutes.get('/product/:id', idValidation, productController.getOne)
 
-  apiRoutes.put('/product/edit/:id', idValidation, productController.update)
+  apiRoutes.put('/product/:id', idValidation, productController.update)
 
   apiRoutes.delete('/product/:id', idValidation, productController.destroy)
 }

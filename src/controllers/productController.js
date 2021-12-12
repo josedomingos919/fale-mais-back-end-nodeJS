@@ -5,14 +5,14 @@ const Product = db.products
 const add = async (req, res) => {
   const { name, maxMinute, percentageAdd, price } = req.body
 
-  const productResponse = await Product.create({
+  const response = await Product.create({
     name,
     price,
     maxMinute,
     percentageAdd,
   })
 
-  res.status(200).send(productResponse)
+  res.status(200).send(response)
 }
 
 const getAll = async (req, res) => {
@@ -24,23 +24,23 @@ const getAll = async (req, res) => {
 const getOne = async (req, res) => {
   const { id } = req.params
 
-  const productResponse = await Product.findOne({
+  const response = await Product.findOne({
     where: {
       id,
     },
   })
 
-  res.status(200).send(productResponse)
+  res.status(200).send(response)
 }
 
 const update = async (req, res) => {
   const { id } = req.params
 
-  const productResponse = await Product.update(req.body, {
+  const response = await Product.update(req.body, {
     where: { id },
   })
 
-  res.status(200).send(productResponse)
+  res.status(200).send(response)
 }
 
 const destroy = async (req, res) => {

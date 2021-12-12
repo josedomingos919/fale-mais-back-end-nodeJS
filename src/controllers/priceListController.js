@@ -3,13 +3,12 @@ const db = require('../models')
 const PriceList = db.priceList
 
 const add = async (req, res) => {
-  const { name, maxMinute, percentageAdd, price } = req.body
+  const { origin, destination, tariff } = req.body
 
   const response = await PriceList.create({
-    name,
-    price,
-    maxMinute,
-    percentageAdd,
+    origin,
+    destination,
+    tariff,
   })
 
   res.status(200).send(response)
