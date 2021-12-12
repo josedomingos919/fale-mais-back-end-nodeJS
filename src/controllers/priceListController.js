@@ -88,7 +88,10 @@ const calcPlanCost = async (req, res) => {
   }
 
   const response = {
+    origin,
+    duration,
     minutesOut,
+    destination,
     totalWithTolkMore,
     totalWithOutTolkMore,
     plan: selectedPlan,
