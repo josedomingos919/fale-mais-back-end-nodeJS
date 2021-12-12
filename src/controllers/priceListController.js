@@ -1,6 +1,4 @@
-const db = require('../models')
-
-const PriceList = db.priceList
+const { PriceList, Product } = require('../models')
 
 const add = async (req, res) => {
   const { origin, destination, tariff } = req.body
@@ -61,10 +59,50 @@ const destroy = async (req, res) => {
   res.status(200).send('Product was deleted!...')
 }
 
+const calcPlanCost = async (req, res) => {
+  const { origin, destination, duration, planId } = req.body
+
+  const selectedPrice = await PriceList.findOne({
+    where: {
+      origin,
+      destination,
+    },
+  })
+
+  const selectedPlan = await Product.findOne({
+    where: {
+      id: planId,
+    },
+  })
+
+  let totalWithTolkMore = 0
+  let totalWithOutTolkMore = duration * selectedPrice.tariff
+
+  let minutesOut = duration - selectedPlan.maxMinute
+  minutesOut = minutesOut > 0 ? minutesOut : 0
+
+  if (minutesOut > 0) {
+    totalWithTolkMore = minutesOut * selectedPrice.tariff
+    totalWithTolkMore += totalWithTolkMore * 0.1
+    totalWithTolkMore = parseFloat(totalWithTolkMore).toFixed(2)
+  }
+
+  const response = {
+    minutesOut,
+    totalWithTolkMore,
+    totalWithOutTolkMore,
+    plan: selectedPlan,
+    price: selectedPrice,
+  }
+
+  res.status(200).send(response)
+}
+
 module.exports = {
   add,
-  update,
-  destroy,
   getAll,
   getOne,
+  update,
+  destroy,
+  calcPlanCost,
 }

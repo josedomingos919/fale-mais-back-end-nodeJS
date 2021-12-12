@@ -2,7 +2,7 @@ const priceListController = require('../controllers/priceListController')
 
 const {
   validationMiddleware: { idValidation },
-  priceListMiddleware: { priceValidation },
+  priceListMiddleware: { priceValidation, calcPlanCostValidation },
 } = require('./../middlewares')
 
 module.exports = (apiRoutes) => {
@@ -15,4 +15,10 @@ module.exports = (apiRoutes) => {
   apiRoutes.put('/price/:id', idValidation, priceListController.update)
 
   apiRoutes.delete('/price/:id', idValidation, priceListController.destroy)
+
+  apiRoutes.post(
+    '/price/calc',
+    calcPlanCostValidation,
+    priceListController.calcPlanCost,
+  )
 }

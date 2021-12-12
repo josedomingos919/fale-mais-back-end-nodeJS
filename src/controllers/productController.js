@@ -1,6 +1,4 @@
-const db = require('../models')
-
-const Product = db.products
+const { Product } = require('../models')
 
 const add = async (req, res) => {
   const { name, maxMinute, percentageAdd, price } = req.body
