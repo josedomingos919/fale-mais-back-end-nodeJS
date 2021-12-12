@@ -30,15 +30,7 @@ const getOne = async (req, res) => {
 }
 
 const update = async (req, res) => {
-  const { id } = req.query
-
-  if (!id) {
-    res.status(401).send({
-      error: true,
-      message: 'Eperava receber o id',
-    })
-    return
-  }
+  const { id } = req.params
 
   const response = await PriceList.update(req.body, {
     where: { id },
@@ -48,7 +40,7 @@ const update = async (req, res) => {
 }
 
 const destroy = async (req, res) => {
-  const { id } = req.query
+  const { id } = req.params
 
   await PriceList.destroy({
     where: {
@@ -56,7 +48,9 @@ const destroy = async (req, res) => {
     },
   })
 
-  res.status(200).send('Product was deleted!...')
+  res.status(200).send({
+    message: 'Product was deleted!...',
+  })
 }
 
 const calcPlanCost = async (req, res) => {

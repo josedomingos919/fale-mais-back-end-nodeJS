@@ -50,7 +50,9 @@ const destroy = async (req, res) => {
     },
   })
 
-  res.status(200).send('Product was deleted!...')
+  res.status(200).send({
+    message: 'Product was deleted!...',
+  })
 }
 
 module.exports = {
