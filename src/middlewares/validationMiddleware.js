@@ -1,3 +1,7 @@
+const {
+  functions: { isEmpty },
+} = require('../utilities')
+
 const idValidation = async (req, res, next) => {
   const { id } = req.params
 
