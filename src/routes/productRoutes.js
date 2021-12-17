@@ -2,7 +2,7 @@ const productController = require('../controllers/productController')
 
 const {
   validationMiddleware: { idValidation },
-  productMiddlewares: { productValidation },
+  productMiddleware: { productValidation },
 } = require('./../middlewares')
 
 module.exports = (apiRoutes) => {

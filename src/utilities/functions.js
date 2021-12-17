@@ -1,17 +1,4 @@
-const isEmpty = (val) => {
-  // test results
-  //---------------
-  // []        true, empty array
-  // {}        true, empty object
-  // null      true
-  // undefined true
-  // ""        true, empty string
-  // ''        true, empty string
-  // 0         false, number
-  // true      false, boolean
-  // false     false, boolean
-  // Date      false
-  // function  false
+const isEmpty = (val) => { 
 
   if (!val) return true
 
@@ -23,12 +10,10 @@ const isEmpty = (val) => {
   )
     return false
 
-  if (val == null || val.length === 0)
-    // null or 0 length array
+  if (val == null || val.length === 0) 
     return true
 
-  if (typeof val == 'object') {
-    // empty object
+  if (typeof val == 'object') { 
 
     var r = true
 

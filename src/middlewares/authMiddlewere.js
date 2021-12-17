@@ -2,7 +2,7 @@ const {
   functions: { isEmpty },
 } = require('../utilities')
 
-const validateApiAcess = (req, res, next) => {
+const validateApiAccess = (req, res, next) => {
   const { ['x-app-key']: appKey } = req.headers
 
   if (isEmpty(appKey) || appKey !== process.env.API_KEY)
@@ -13,4 +13,4 @@ const validateApiAcess = (req, res, next) => {
   else next()
 }
 
-module.exports = { validateApiAcess }
+module.exports = { validateApiAccess }

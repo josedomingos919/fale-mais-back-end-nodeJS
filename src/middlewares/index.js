@@ -1,11 +1,11 @@
-const authMiddlewere = require('./authMiddlewere')
-const productMiddlewares = require('./productMiddlewares')
+const authMiddleware = require('./authMiddleware')
+const productMiddleware = require('./productMiddleware')
 const priceListMiddleware = require('./priceListMiddleware')
 const validationMiddleware = require('./validationMiddleware')
 
 module.exports = {
-  authMiddlewere,
-  productMiddlewares,
+  authMiddleware,
+  productMiddleware,
   priceListMiddleware,
   validationMiddleware,
 }

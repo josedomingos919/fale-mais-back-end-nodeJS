@@ -6,7 +6,7 @@ const dotenv = require('dotenv')
 const apiRoutes = express.Router()
 
 const {
-  authMiddlewere: { validateApiAcess },
+  authMiddleware: { validateApiAccess },
 } = require('./src/middlewares')
 
 const {
@@ -21,7 +21,7 @@ const app = express()
 
 app.use(express.json())
 
-app.use(validateApiAcess)
+app.use(validateApiAccess)
 
 initializeRoute(apiRoutes)
 

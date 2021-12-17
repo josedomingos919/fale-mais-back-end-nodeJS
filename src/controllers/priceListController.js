@@ -69,16 +69,16 @@ const calcPlanCost = async (req, res) => {
     },
   })
 
-  let totalWithTolkMore = 0
-  let totalWithOutTolkMore = duration * selectedPrice.tariff
+  let totalWithTalkMore = 0
+  let totalWithOutTalkMore = duration * selectedPrice.tariff
 
   let minutesOut = duration - selectedPlan.maxMinute
   minutesOut = minutesOut > 0 ? minutesOut : 0
 
   if (minutesOut > 0) {
-    totalWithTolkMore = minutesOut * selectedPrice.tariff
-    totalWithTolkMore += totalWithTolkMore * 0.1
-    totalWithTolkMore = parseFloat(totalWithTolkMore).toFixed(2)
+    totalWithTalkMore = minutesOut * selectedPrice.tariff
+    totalWithTalkMore += totalWithTalkMore * 0.1
+    totalWithTalkMore = parseFloat(totalWithTalkMore).toFixed(2)
   }
 
   const response = {
@@ -86,8 +86,8 @@ const calcPlanCost = async (req, res) => {
     duration,
     minutesOut,
     destination,
-    totalWithTolkMore,
-    totalWithOutTolkMore,
+    totalWithTalkMore,
+    totalWithOutTalkMore,
     plan: selectedPlan,
     price: selectedPrice,
   }
